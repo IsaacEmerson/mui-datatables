@@ -2,6 +2,7 @@ import React from 'react';
 import Typography from '@material-ui/core/Typography';
 import Toolbar from '@material-ui/core/Toolbar';
 import Tooltip from '@material-ui/core/Tooltip';
+import Paper from '@material-ui/core/Paper';
 import IconButton from '@material-ui/core/IconButton';
 import Popover from './Popover';
 import TableFilter from './TableFilter';
@@ -17,19 +18,34 @@ import styled from '../styled';
 import { createCSVDownload } from '../utils';
 
 export const defaultToolbarStyles = (theme, props) => ({
-  root: {},
+  root: { marginTop: 100 },
+  paperHeader: {
+    width: '100%',
+    backgroundColor: '#6A1B9A',
+    color: 'white',
+    padding: '25px',
+    marginTop: '-35px',
+    marginBottom: '30px',
+    webkitBoxShadow: '0px 5px 20px -1px rgba(106,27,154,0.4)',
+    mozBoxShadow: '0px 5px 20px -1px rgba(106,27,154,0.4)',
+    boxShadow: '0px 5px 20px -1px rgba(106,27,154,0.4)',
+    display: 'flex',
+    direction: 'row',
+    alignItems: 'center',
+  },
   left: {
     flex: '1 1 auto',
   },
+  iconWhite: { color: 'white' },
   actions: {
     flex: '1 1 auto',
     textAlign: 'right',
   },
-  titleRoot: {},
-  titleText: {},
+  titleRoot: { marginLeft: 5 },
+  titleText: { color: 'white' },
   icon: {
     '&:hover': {
-      color: theme.palette.primary.main,
+      color: '',
     },
   },
   iconActive: {
@@ -48,8 +64,9 @@ export const defaultToolbarStyles = (theme, props) => ({
 
 export const responsiveToolbarStyles = theme => ({
   [theme.breakpoints.down('sm')]: {
-    titleRoot: {},
+    titleRoot: { marginLeft: 5 },
     titleText: {
+      color: 'white',
       fontSize: '16px',
     },
     spacer: {
@@ -172,103 +189,105 @@ class TableToolbar extends React.Component {
 
     return (
       <Toolbar className={classes.root} role={'toolbar'} aria-label={'Table Toolbar'}>
-        <div className={classes.left}>
-          {showSearch === true ? (
-            <TableSearch
-              searchText={searchText}
-              onSearch={this.handleSearch}
-              onHide={this.hideSearch}
-              options={options}
-            />
-          ) : typeof title !== 'string' ? (
-            title
-          ) : (
-            <div className={classes.titleRoot} aria-hidden={'true'}>
-              <Typography variant="h6" className={classes.titleText}>
-                {title}
-              </Typography>
-            </div>
-          )}
-        </div>
-        <div className={classes.actions}>
-          {options.search && (
-            <Tooltip title={search} disableFocusListener>
-              <IconButton
-                aria-label={search}
-                buttonRef={el => (this.searchButton = el)}
-                classes={{ root: this.getActiveIcon(classes, 'search') }}
-                onClick={this.setActiveIcon.bind(null, 'search')}>
-                <SearchIcon />
-              </IconButton>
-            </Tooltip>
-          )}
-          {options.download && (
-            <Tooltip title={downloadCsv}>
-              <IconButton aria-label={downloadCsv} classes={{ root: classes.icon }} onClick={this.handleCSVDownload}>
-                <DownloadIcon />
-              </IconButton>
-            </Tooltip>
-          )}
-          {options.print && (
-            <span>
-              <ReactToPrint
-                trigger={() => (
-                  <Tooltip title={print}>
-                    <IconButton aria-label={print} classes={{ root: classes.icon }}>
-                      <PrintIcon />
+        <Paper className={classes.paperHeader}>
+          <div className={classes.left}>
+            {showSearch === true ? (
+              <TableSearch
+                searchText={searchText}
+                onSearch={this.handleSearch}
+                onHide={this.hideSearch}
+                options={options}
+              />
+            ) : typeof title !== 'string' ? (
+              title
+            ) : (
+              <div className={classes.titleRoot} aria-hidden={'true'}>
+                <Typography variant="h6" className={classes.titleText}>
+                  {title}
+                </Typography>
+              </div>
+            )}
+          </div>
+          <div className={classes.actions}>
+            {options.search && (
+              <Tooltip title={search} disableFocusListener>
+                <IconButton
+                  aria-label={search}
+                  buttonRef={el => (this.searchButton = el)}
+                  classes={{ root: this.getActiveIcon(classes, 'search') }}
+                  onClick={this.setActiveIcon.bind(null, 'search')}>
+                  <SearchIcon className={classes.iconWhite} />
+                </IconButton>
+              </Tooltip>
+            )}
+            {options.download && (
+              <Tooltip title={downloadCsv}>
+                <IconButton aria-label={downloadCsv} classes={{ root: classes.icon }} onClick={this.handleCSVDownload}>
+                  <DownloadIcon className={classes.iconWhite} />
+                </IconButton>
+              </Tooltip>
+            )}
+            {options.print && (
+              <span>
+                <ReactToPrint
+                  trigger={() => (
+                    <Tooltip title={print}>
+                      <IconButton aria-label={print} classes={{ root: classes.icon }}>
+                        <PrintIcon className={classes.iconWhite} />
+                      </IconButton>
+                    </Tooltip>
+                  )}
+                  content={() => this.props.tableRef()}
+                />
+              </span>
+            )}
+            {options.viewColumns && (
+              <Popover
+                refExit={this.setActiveIcon.bind(null)}
+                trigger={
+                  <Tooltip title={viewColumns} disableFocusListener>
+                    <IconButton
+                      aria-label={viewColumns}
+                      classes={{ root: this.getActiveIcon(classes, 'viewcolumns') }}
+                      onClick={this.setActiveIcon.bind(null, 'viewcolumns')}>
+                      <ViewColumnIcon className={classes.iconWhite} />
                     </IconButton>
                   </Tooltip>
-                )}
-                content={() => this.props.tableRef()}
+                }
+                content={
+                  <TableViewCol data={data} columns={columns} options={options} onColumnUpdate={toggleViewColumn} />
+                }
               />
-            </span>
-          )}
-          {options.viewColumns && (
-            <Popover
-              refExit={this.setActiveIcon.bind(null)}
-              trigger={
-                <Tooltip title={viewColumns} disableFocusListener>
-                  <IconButton
-                    aria-label={viewColumns}
-                    classes={{ root: this.getActiveIcon(classes, 'viewcolumns') }}
-                    onClick={this.setActiveIcon.bind(null, 'viewcolumns')}>
-                    <ViewColumnIcon />
-                  </IconButton>
-                </Tooltip>
-              }
-              content={
-                <TableViewCol data={data} columns={columns} options={options} onColumnUpdate={toggleViewColumn} />
-              }
-            />
-          )}
-          {options.filter && (
-            <Popover
-              refExit={this.setActiveIcon.bind(null)}
-              classes={{ paper: classes.filterPaper }}
-              trigger={
-                <Tooltip title={filterTable} disableFocusListener>
-                  <IconButton
-                    aria-label={filterTable}
-                    classes={{ root: this.getActiveIcon(classes, 'filter') }}
-                    onClick={this.setActiveIcon.bind(null, 'filter')}>
-                    <FilterIcon />
-                  </IconButton>
-                </Tooltip>
-              }
-              content={
-                <TableFilter
-                  columns={columns}
-                  options={options}
-                  filterList={filterList}
-                  filterData={filterData}
-                  onFilterUpdate={filterUpdate}
-                  onFilterReset={resetFilters}
-                />
-              }
-            />
-          )}
-          {options.customToolbar && options.customToolbar()}
-        </div>
+            )}
+            {options.filter && (
+              <Popover
+                refExit={this.setActiveIcon.bind(null)}
+                classes={{ paper: classes.filterPaper }}
+                trigger={
+                  <Tooltip title={filterTable} disableFocusListener>
+                    <IconButton
+                      aria-label={filterTable}
+                      classes={{ root: this.getActiveIcon(classes, 'filter') }}
+                      onClick={this.setActiveIcon.bind(null, 'filter')}>
+                      <FilterIcon className={classes.iconWhite} />
+                    </IconButton>
+                  </Tooltip>
+                }
+                content={
+                  <TableFilter
+                    columns={columns}
+                    options={options}
+                    filterList={filterList}
+                    filterData={filterData}
+                    onFilterUpdate={filterUpdate}
+                    onFilterReset={resetFilters}
+                  />
+                }
+              />
+            )}
+            {options.customToolbar && options.customToolbar()}
+          </div>
+        </Paper>
       </Toolbar>
     );
   }
