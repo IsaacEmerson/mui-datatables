@@ -18,7 +18,7 @@ import styled from '../styled';
 import { createCSVDownload } from '../utils';
 
 export const defaultToolbarStyles = (theme, props) => ({
-  root: { marginTop: 100 },
+  root: {},
   paperHeader: {
     width: '100%',
     backgroundColor: '#6A1B9A',
