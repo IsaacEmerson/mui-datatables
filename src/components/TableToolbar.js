@@ -188,8 +188,8 @@ class TableToolbar extends React.Component {
     const { showSearch, searchText } = this.state;
 
     return (
-      <Toolbar className={classes.root} role={'toolbar'} aria-label={'Table Toolbar'}>
-        <Paper ref={tableRef} className={classes.paperHeader}>
+      <Toolbar ref={tableRef} className={classes.root} role={'toolbar'} aria-label={'Table Toolbar'}>
+        <Paper className={classes.paperHeader}>
           <div className={classes.left}>
             {showSearch === true ? (
               <TableSearch
