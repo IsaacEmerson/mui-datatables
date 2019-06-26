@@ -1,6 +1,6 @@
 import React from 'react';
 import Grow from '@material-ui/core/Grow';
-import TextField from '@material-ui/core/TextField';
+import InputBase from '@material-ui/core/InputBase';
 import SearchIcon from '@material-ui/icons/Search';
 import IconButton from '@material-ui/core/IconButton';
 import ClearIcon from '@material-ui/icons/Clear';
@@ -12,16 +12,28 @@ const defaultSearchStyles = theme => ({
     flex: '1 0 auto',
   },
   searchIcon: {
-    color: theme.palette.text.secondary,
+    color: 'white',
     marginTop: '10px',
     marginRight: '8px',
   },
-  searchText: {
-    flex: '0.8 0',
-  },
+
   clearIcon: {
-    '&:hover': {
-      color: theme.palette.error.main,
+    color: 'white',
+  },
+  searchInput: {
+    flex: '1 0',
+    position: 'relative',
+    backgroundColor: 'transparent',
+    color: 'white',
+    borderBottom: '1px solid white',
+    fontSize: 16,
+    width: 'auto',
+    padding: '6px 0px',
+    marginTop: '-16px',
+    transition: theme.transitions.create(['border-color', 'box-shadow']),
+    '&:focus': {
+      borderColor: 'white',
+      color: 'white'
     },
   },
 });
@@ -52,25 +64,27 @@ class TableSearch extends React.Component {
   };
 
   render() {
-    const { classes, options, onHide, searchText } = this.props;
+    const { classes, options, onHide, initialSearchText } = this.props;
 
     return (
       <Grow appear in={true} timeout={300}>
         <div className={classes.main} ref={el => (this.rootRef = el)}>
           <SearchIcon className={classes.searchIcon} />
-          <TextField
-            className={classes.searchText}
-            autoFocus={true}
-            InputProps={{
-              'aria-label': options.textLabels.toolbar.search,
+          <InputBase
+            id="search-input"
+            classes={{
+              input: classes.searchInput,
             }}
-            value={searchText || ''}
+            // InputProps={{
+            //   'aria-label': options.textLabels.toolbar.search,
+            // }}
+            defaultValue={initialSearchText}
             onChange={this.handleTextChange}
             fullWidth={true}
             inputRef={el => (this.searchField = el)}
           />
-          <IconButton className={classes.clearIcon} onClick={onHide}>
-            <ClearIcon />
+          <IconButton onClick={onHide}>
+            <ClearIcon className={classes.clearIcon}/>
           </IconButton>
         </div>
       </Grow>
