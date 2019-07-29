@@ -21,11 +21,7 @@ import { buildMap, getCollatorComparator, sortCompare } from './utils';
 
 const defaultTableStyles = {
   root: {},
-  paperBody: {
-    webkitBoxShadow: '0px 10px 17px -5px rgba(150,150,150,0.48)',
-    mozBoxShadow: '0px 10px 17px -5px rgba(150,150,150,0.48)',
-    boxShadow: '0px 10px 17px -5px rgba(150,150,150,0.48)',
-  },
+  paper: {},
   tableRoot: {
     outline: 'none',
   },
@@ -1104,7 +1100,7 @@ class MUIDataTable extends React.Component {
       <Paper
         elevation={this.options.elevation}
         ref={this.tableContent}
-        className={classes.paperBody}>
+        className={classnames(classes.paper, className)}>
         {selectedRows.data.length ? (
           <TableToolbarSelect
             options={this.options}
