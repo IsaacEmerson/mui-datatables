@@ -33,7 +33,7 @@ const defaultSearchStyles = theme => ({
     transition: theme.transitions.create(['border-color', 'box-shadow']),
     '&:focus': {
       borderColor: 'white',
-      color: 'white'
+      color: 'white',
     },
   },
 });
@@ -84,7 +84,7 @@ class TableSearch extends React.Component {
             inputRef={el => (this.searchField = el)}
           />
           <IconButton onClick={onHide}>
-            <ClearIcon className={classes.clearIcon}/>
+            <ClearIcon className={classes.clearIcon} />
           </IconButton>
         </div>
       </Grow>

@@ -3,35 +3,35 @@
  */
 const textLabels = {
   body: {
-    noMatch: 'Sorry, no matching records found',
-    toolTip: 'Sort',
+    noMatch: 'Desculpe, nenhum registro correspondente foi encontrado',
+    toolTip: 'Ordenar',
   },
   pagination: {
-    next: 'Next Page',
-    previous: 'Previous Page',
-    rowsPerPage: 'Rows per page:',
-    displayRows: 'of',
+    next: 'Próxima página',
+    previous: 'Página anterior',
+    rowsPerPage: 'Linhas por página:',
+    displayRows: 'De',
   },
   toolbar: {
-    search: 'Search',
+    search: 'Pesquisar',
     downloadCsv: 'Download CSV',
-    print: 'Print',
-    viewColumns: 'View Columns',
-    filterTable: 'Filter Table',
+    print: 'Imprimir',
+    viewColumns: 'Visualizar colunas',
+    filterTable: 'Filtrar Tabela',
   },
   filter: {
-    all: 'All',
-    title: 'FILTERS',
-    reset: 'RESET',
+    all: 'TODOS',
+    title: 'FILTROS',
+    reset: 'LIMPAR',
   },
   viewColumns: {
-    title: 'Show Columns',
-    titleAria: 'Show/Hide Table Columns',
+    title: 'Mostrar Colunas',
+    titleAria: 'Mostrar / ocultar colunas da tabela',
   },
   selectedRows: {
-    text: 'row(s) selected',
-    delete: 'Delete',
-    deleteAria: 'Delete Selected Rows',
+    text: 'linha (s) selecionada',
+    delete: 'Excluir',
+    deleteAria: 'Excluir linhas selecionadas',
   },
 };
 
