@@ -1101,10 +1101,7 @@ class MUIDataTable extends React.Component {
     const columnNames = columns.map(column => ({ name: column.name }));
 
     return (
-      <Paper
-        elevation={this.options.elevation}
-        ref={this.tableContent}
-        className={classes.paperBody}>
+      <Paper elevation={this.options.elevation} ref={this.tableContent} className={classes.paperBody}>
         {selectedRows.data.length ? (
           <TableToolbarSelect
             options={this.options}
