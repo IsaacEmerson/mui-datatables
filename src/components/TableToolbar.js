@@ -189,7 +189,7 @@ class TableToolbar extends React.Component {
 
     return (
       <Toolbar className={classes.root} role={'toolbar'} aria-label={'Table Toolbar'}>
-        <Paper className={classes.paperHeader} style={{ backgroundColor: color || '#6A1B9A' }}>
+        <Paper className={classes.paperHeader} style={{ backgroundColor: color || 'green' }}>
           <div className={classes.left}>
             {showSearch === true ? (
               <TableSearch
