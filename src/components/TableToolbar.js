@@ -181,6 +181,7 @@ class TableToolbar extends React.Component {
       resetFilters,
       toggleViewColumn,
       title,
+      color,
       tableRef,
     } = this.props;
 
@@ -189,7 +190,7 @@ class TableToolbar extends React.Component {
 
     return (
       <Toolbar className={classes.root} role={'toolbar'} aria-label={'Table Toolbar'}>
-        <Paper className={classes.paperHeader}>
+        <Paper className={classes.paperHeader} style={{ backgroundColor: color }}>
           <div className={classes.left}>
             {showSearch === true ? (
               <TableSearch

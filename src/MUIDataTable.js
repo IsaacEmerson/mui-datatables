@@ -64,7 +64,7 @@ const TABLE_LOAD = {
 };
 
 // Populate this list with anything that might render in the toolbar to determine if we hide the toolbar
-const TOOLBAR_ITEMS = ['title', 'filter', 'search', 'print', 'download', 'viewColumns', 'customToolbar'];
+const TOOLBAR_ITEMS = ['title', 'color', 'filter', 'search', 'print', 'download', 'viewColumns', 'customToolbar'];
 
 const hasToolbarItem = (options, title) => {
   options.title = title;
@@ -76,6 +76,7 @@ class MUIDataTable extends React.Component {
   static propTypes = {
     /** Title of the table */
     title: PropTypes.oneOfType([PropTypes.string, PropTypes.element]).isRequired,
+    color: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
     /** Data used to describe table */
     data: PropTypes.array.isRequired,
     /** Columns used to describe table */
@@ -1080,7 +1081,7 @@ class MUIDataTable extends React.Component {
   };
 
   render() {
-    const { classes, className, title } = this.props;
+    const { classes, className, title, color } = this.props;
     const {
       announceText,
       activeColumn,
@@ -1125,6 +1126,7 @@ class MUIDataTable extends React.Component {
               searchTextUpdate={this.searchTextUpdate}
               tableRef={this.getTableContentRef}
               title={title}
+              color={color}
               toggleViewColumn={this.toggleViewColumn}
               setTableAction={this.setTableAction}
             />
