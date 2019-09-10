@@ -21,7 +21,6 @@ export const defaultToolbarStyles = (theme, props) => ({
   root: {},
   paperHeader: {
     width: '100%',
-    backgroundColor: '#6A1B9A',
     color: 'white',
     padding: '25px',
     marginTop: '-35px',
@@ -190,7 +189,7 @@ class TableToolbar extends React.Component {
 
     return (
       <Toolbar className={classes.root} role={'toolbar'} aria-label={'Table Toolbar'}>
-        <Paper className={classes.paperHeader} style={{ backgroundColor: color }}>
+        <Paper className={classes.paperHeader} style={{ backgroundColor: color || '#6A1B9A' }}>
           <div className={classes.left}>
             {showSearch === true ? (
               <TableSearch
